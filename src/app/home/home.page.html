@@ -12,9 +12,32 @@
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
   </ion-header>
+  <!-- https://github.com/ionic-team/ionic/issues/14868 -->
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <form [formGroup]="grupoControl">
+    <ion-item>
+      <ion-label>pon algo</ion-label>
+      <ion-input  type="text"[(ngModel)]="name" formControlName="longitudMinima"
+      ></ion-input>
+      <ion-label *ngIf="grupoControl.get('longitudMinima').dirty"
+        >has escrito algo </ion-label>
+      <ion-label *ngIf="!grupoControl.get('longitudMinima').valid"
+        >no es valido</ion-label>
+
+    </ion-item>
+    <ion-item>
+
+      <ion-label *ngIf="grupoControl.get('longitudMinima').errors">
+        {{grupoControl.get('longitudMinima').errors|json}}
+      </ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-input formControlName='yearInput'></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label *ngIf="grupoControl.get('yearInput').errors&&grupoControl.get('yearInput').dirty" >
+        {{validationMessages.yearInput.isOld}}
+      </ion-label>
+    </ion-item>
+  </form>
 </ion-content>
